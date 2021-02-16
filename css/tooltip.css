@@ -1,0 +1,23 @@
+
+.verse {
+  display: inline-block;
+  position: relative;
+}
+
+.verse:hover {
+  cursor: default;
+}
+
+.tooltip {
+  color: white;
+  background-color: #222222;
+  border-radius: 5px;
+  display: none;
+  margin-left: 10px;
+  padding: 0px 5px;
+  font-weight: bold;
+}
+
+.verse:hover .tooltip {
+  display: inline-block;
+}
