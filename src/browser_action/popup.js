@@ -23,6 +23,7 @@ function toggleMainOn() {
       conditionallyReloadTab(); // reload tab if on Chaucer website
       changeButtonClass(new_value); // change button class to reflect status
       changeStatusText(new_value); // change 'on' or 'off' sign
+      setIcon(new_value);
     })
   })
 }
@@ -86,4 +87,8 @@ function loadFonts() {
 function openChaucerWebsite() {
   const CHAUCER_URL = 'https://chaucer.fas.harvard.edu/pages/text-and-translations'
   chrome.tabs.create({ url: CHAUCER_URL });
+}
+
+function setIcon(status) {
+  chrome.runtime.sendMessage({ grayIcon: !status });
 }

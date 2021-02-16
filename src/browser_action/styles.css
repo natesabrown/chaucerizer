@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'Medieval';
+  font-style: normal;
+  font-weight: 400;
+  src: url('chrome-extension://__MSG_@@extension_id__/src/browser_action/MedievalSharp-Regular.ttf');
+}
+#container {
+  width: 300px;
+  height: 400px;
+}
+#main_div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+}
+#main_button {
+  width: 60%;
+  transition: filter 0.5s;
+}
+#main_button:hover {
+  cursor: grab;
+}
+.button_off {
+  filter: grayscale(100%);
+}
+#status_text {
+  font-family: 'Medieval';
+  font-size: 40px;
+  margin-top: 10px;
+}
+#paper_bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: saturate(0.7);
+}
+#castle {
+  width: calc(100% + 6px);
+  position: absolute;
+  bottom: -3px;
+  left: -3px;
+  filter: brightness(0.78);
+}
+#visit_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 5px solid #00000070;
+  margin-top: 10px;
+  background-color: #00000040;
+}
+#visit_button:hover {
+  cursor: pointer;
+}
+#visit_button span {
+  font-family: 'Medieval';
+  font-size: 25px;
+  margin-left: 5px;
+}
+#visit_button img {
+  width: 50px;
+}
+#name {
+  font-family: 'Medieval';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  font-size: 16px;
+
+}

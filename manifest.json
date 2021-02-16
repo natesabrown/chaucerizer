@@ -10,9 +10,15 @@
     "128": "icons/icon128.png"
   },
   "browser_action": {
-    "default_icon": "icons/icon19.png",
+    "default_icon": "icons/icon128.png",
     "default_title": "Chaucerizer",
     "default_popup": "src/browser_action/browser_action.html"
+  },
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistent": true
   },
   "permissions": [
     "https://chaucer.fas.harvard.edu/*",

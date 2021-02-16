@@ -1,56 +1,24 @@
-<!doctype html>
-<style>
-	@font-face {
-		font-family: 'Medieval';
-		font-style: normal;
-		font-weight: 400;
-		src: url('chrome-extension://__MSG_@@extension_id__/src/browser_action/MedievalSharp-Regular.ttf');
-	}
-	#container {
-		width: 300px;
-		height: 400px;
-	}
-	#main_div {
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-		align-items: center;
-		padding: 20px;
-		position: relative;
-	}
-	#main_button {
-		width: 60%;
-		transition: filter 0.5s;
-	}
-	#main_button:hover {
-		cursor: grab;
-	}
-	.button_off {
-		filter: grayscale(100%);
-	}
-	#status_text {
-		font-family: 'Medieval';
-		font-size: 40px;
-		margin-top: 20px;
-	}
-	#book {
-		width: 10%;
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-	#book:hover {
-		cursor: pointer;
-	}
-</style>
-
-<div id="container">
-	<div id="main_div">
-		<img id="book" src="./assets/book.svg" title="Go to Chaucer book" />
-		<img id="main_button" src="./assets/button.png" title="Toggle Chaucerizer On/Off"/>
-		<div id="status_text"></div>
-	</div>
-</div>
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="./styles.css" />
+	</head>
+	<body>
+		<div id="container">
+			<img id="paper_bg" src="./assets/old_paper.png" />
+			<div id="main_div">
+				<img id="main_button" src="./assets/button.png" title="Toggle Chaucerizer On/Off"/>
+				<div id="status_text"></div>
+				<div id="visit_button">
+					<img src="./assets/book.svg" id="book" title="Go to Chaucer book" />
+					<span>Go to Book</span>
+				</div>
+			</div>
+			<img id="castle" src="./assets/castle.svg" />
+			<div id="name">Chaucerizer</div>
+		</div>
+	</body>
+</html>
 
 <!-- Scripts are required to be imported from other file -->
 <script src="popup.js"></script>
