@@ -9,7 +9,7 @@ window.onload = () => {
 
   addStatusText();
 
-  loadFont();
+  loadFonts();
 
   loadButtonClass();
 }
@@ -78,8 +78,7 @@ function changeStatusText(status) {
   }
 }
 
-// allows the extension to recognize the font
-function loadFont() {
+function loadFonts() {
   let font = new FontFace("Medieval", "url('./fonts/MedievalSharp-Regular.ttf')");
   document.fonts.add(font);
 }

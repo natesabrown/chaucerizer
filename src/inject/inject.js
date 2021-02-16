@@ -11,7 +11,7 @@ chrome.extension.sendMessage({}, function(response) {
 			let main_on = result.main_on;
 			console.log(`Got result: ${main_on}`);
 			if (main_on) {
-				runMainScript();
+				addTooltips();
 			} else {
 				console.log('No running for the script!')
 			}
@@ -20,25 +20,14 @@ chrome.extension.sendMessage({}, function(response) {
 	}, 10);
 });
 
-function runMainScript() {
-	let content = getContentDiv();
-	let paragraphs = getRelevantParagraphs(content);
-	let modernEnglishStrings = removeAndGetStrings(paragraphs);
-	let verses = getVerses(paragraphs);
-	addClassToVerses(verses);
-	addChildrenToVerses(verses, modernEnglishStrings);
-}
-
-const MAIN_DIV_NAME = 'field-item';
-
 function getContentDiv() {
+	const MAIN_DIV_NAME = 'field-item';
 	let field_items = document.getElementsByClassName(MAIN_DIV_NAME);
 	let item = field_items[0];
 	let children = item.children;
 	return children;
 }
 
-// here is where we need to provide more validity for the paragraphs
 function getRelevantParagraphs(paragraphs) {
 	const FIRST_IND = 2;
 	let SECOND_IND;
@@ -60,28 +49,31 @@ function getRelevantParagraphs(paragraphs) {
 	return return_arr;
 }
 
-// removes the 'New English' from the paragraphs and returns
-// what was removed
-// horrible code, let's make this better.
-function removeAndGetStrings(paragraphs) {
-	let del_arr = []
-	let ret_arr = []
+// adds Modern English tooltips
+function addTooltips() {
+	const content = getContentDiv();
+	const paragraphs = getRelevantParagraphs(content);
+
 	for (let paragraph of paragraphs) {
-		let children = paragraph.getElementsByTagName('span');
-		for (let i = 0; i < children.length; i++) {
+		let spans = paragraph.querySelectorAll('span');
+
+		for (let i = 0; i < spans.length; i++) {
 			if (i % 2 == 1) {
-				let element = children[i];
+				let element = spans[i];
 				let raw_text = element.textContent.trim();
-				ret_arr.push(raw_text);
-				del_arr.push(element)
+
+				let previousElement = spans[i - 1];
+				previousElement.classList.add('verse');
+
+				addTooltipToVerse(previousElement, raw_text);
+
+				element.remove();
 			}
 		}
+
+		// remove the <br> elements from the paragraph for cosmetic purposes
 		removeBrsFromParagraph(paragraph);		
 	}
-	for (let item of del_arr) {
-		item.remove();
-	}
-	return ret_arr;
 }
 
 // removes break child elements from paragraph according
@@ -102,30 +94,9 @@ function removeBrsFromParagraph(paragraph) {
 	}
 }
 
-function getVerses(paragraphs) {
-	let verses = []
-	for (let paragraph of paragraphs) {
-		let children = paragraph.getElementsByTagName('span');
-		verses.push(...children)
-	}
-	return verses;
-}
-
-function addClassToVerses(verses) {
-	const CLASS_NAME = 'verse';
-	for (let verse of verses) {
-		verse.classList.add(CLASS_NAME);
-	}
-}
-
-function addChildrenToVerses(verses, englishStrings) {
-	for (let verse of verses) {
-		let modernEnglishString = englishStrings.shift();
-		addChildToVerse(verse, modernEnglishString);
-	}
-}
-
-function addChildToVerse(verse, text) {
+// adds tooltip construct to verse
+function addTooltipToVerse(verse, text) {
+	console.log(verse);
 	const CLASS_NAME = 'tooltip';
 	let tooltip = document.createElement('span');
 	tooltip.classList.add(CLASS_NAME);
