@@ -9,7 +9,7 @@ chrome.extension.sendMessage({}, function(response) {
 		// ----------------------------------------------------------
 		chrome.storage.sync.get(['main_on'], result => {
 			let main_on = result.main_on;
-			console.log(`Got result: ${main_on}`);
+			// console.log(`Got result: ${main_on}`);
 			if (main_on) {
 				addTooltips();
 			} else {
@@ -96,7 +96,7 @@ function removeBrsFromParagraph(paragraph) {
 
 // adds tooltip construct to verse
 function addTooltipToVerse(verse, text) {
-	console.log(verse);
+	// console.log(verse);
 	const CLASS_NAME = 'tooltip';
 	let tooltip = document.createElement('span');
 	tooltip.classList.add(CLASS_NAME);

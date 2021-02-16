@@ -5,7 +5,7 @@ window.onload = () => {
     toggleMainOn();
   });
 
-  document.getElementById('book').addEventListener('click', openChaucerWebsite)
+  document.getElementById('visit_button').addEventListener('click', openChaucerWebsite)
 
   addStatusText();
 
@@ -18,12 +18,13 @@ function toggleMainOn() {
   chrome.storage.sync.get(['main_on'], result => {
     let value = result.main_on;
     let new_value = !value;
-    chrome.storage.sync.set({ 'main_on': new_value }, () => {
+    chrome.storage.sync.set({ 'main_on': new_value }, async () => {
       // after has been toggled
-      conditionallyReloadTab(); // reload tab if on Chaucer website
+       // reload tab if on Chaucer website
       changeButtonClass(new_value); // change button class to reflect status
       changeStatusText(new_value); // change 'on' or 'off' sign
-      setIcon(new_value);
+      await setIcon(new_value);
+      conditionallyReloadTab();
     })
   })
 }
@@ -89,6 +90,6 @@ function openChaucerWebsite() {
   chrome.tabs.create({ url: CHAUCER_URL });
 }
 
-function setIcon(status) {
-  chrome.runtime.sendMessage({ grayIcon: !status });
+async function setIcon(status) {
+  return chrome.runtime.sendMessage({ grayIcon: !status });
 }
